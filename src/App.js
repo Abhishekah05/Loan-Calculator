@@ -8,6 +8,7 @@ import CurrencySelector from './CurrencySelector/CurrencySelector';
 import AmortizationTable from './AmortizationTable/AmortizationTable ';  // fixed trailing space
 import About from './About/About';
 import ErrorPage  from './ErrorPage/ErrorPage';
+import ExchangeRates  from './ExchangeLiveCurr/CurrencyExchange'
 
 const HomePage = () => (
   <>
@@ -30,8 +31,9 @@ const App = () => {
     }}>
       <Header />
       <Routes>
-        <Route path="/" element={<HomePage />} />
-        <Route path="/about" element={<About />} />
+      <Route path="/" element={<HomePage />} />
+      <Route path="/exchnagerate" element={<ExchangeRates />} />
+      <Route path="/about" element={<About />} />
         <Route path="/error" element={<ErrorPage />} />
       </Routes>
     </Box>

@@ -33,7 +33,7 @@ const Header = () => {
 
   const navItems = [
     { name: 'Home', path: '/' },
-    { name: 'Exchange Rates (LIVE)', path: '/about' },
+    { name: 'ExchangeRates', path: '/exchnagerate' },
     { name: 'About', path: '/about' },
     { name: 'ErrorPage', path: '/error' }
   ];
