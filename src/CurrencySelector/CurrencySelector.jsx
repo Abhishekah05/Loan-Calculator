@@ -20,11 +20,11 @@ import { useLoanContext } from '../Context/Context';
 
 const getCurrencyIcon = (currencyCode) => {
   switch (currencyCode) {
-    case 'USD': return <AttachMoneyIcon />;
-    case 'EUR': return <EuroIcon />;
-    case 'GBP': return <CurrencyPoundIcon />;
-    case 'INR': return <CurrencyRupeeIcon />;
-    default:  return <AttachMoneyIcon />;
+    case 'USD': return <AttachMoneyIcon sx={{ fontSize: '1.1rem' }} />;
+    case 'EUR': return <EuroIcon sx={{ fontSize: '1.1rem' }} />;
+    case 'GBP': return <CurrencyPoundIcon sx={{ fontSize: '1.1rem' }} />;
+    case 'INR': return <CurrencyRupeeIcon sx={{ fontSize: '1.1rem' }} />;
+    default:  return <AttachMoneyIcon sx={{ fontSize: '1.1rem' }} />;
   }
 };
 
@@ -33,36 +33,64 @@ const CurrencySelector = () => {
   const theme = useTheme();
 
   return (
-    <Container maxWidth="lg">
+    <Container maxWidth="sm" sx={{ py: 1 }}>
       <Paper
         elevation={2}
         sx={{
-          p: 2,
-          mt: 2,
-          bgcolor: theme.palette.background.paper
+          p: 1.5,
+          mt: 1,
+          bgcolor: theme.palette.background.paper,
+          maxWidth: 500,
+          mx: 'auto'
         }}
       >
-        <Box sx={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
-          <FormControl sx={{ minWidth: 140 }}>
-            <InputLabel id="currency-label">Currency</InputLabel>
+        <Box sx={{ 
+          display: 'flex', 
+          justifyContent: 'space-between', 
+          alignItems: 'center',
+          minHeight: 'auto'
+        }}>
+          <FormControl sx={{ minWidth: 120 }} size="small">
+            <InputLabel id="currency-label" sx={{ fontSize: '0.9rem' }}>
+              Currency
+            </InputLabel>
             <Select
               labelId="currency-label"
               value={currency}
               label="Currency"
               onChange={(e) => setCurrency(e.target.value)}
-              // <-- Use renderValue to display icon + code
+              size="small"
+              sx={{
+                height: 40,
+                '& .MuiSelect-select': {
+                  py: 1,
+                  display: 'flex',
+                  alignItems: 'center'
+                }
+              }}
+              MenuProps={{
+                PaperProps: {
+                  sx: {
+                    maxHeight: 200,
+                    '& .MuiMenuItem-root': {
+                      minHeight: 36,
+                      py: 0.5
+                    }
+                  }
+                }
+              }}
               renderValue={(value) => (
                 <Box sx={{ display: 'flex', alignItems: 'center' }}>
                   {getCurrencyIcon(value)}
-                  <Typography sx={{ ml: 1 }}>{value}</Typography>
+                  <Typography sx={{ ml: 1, fontSize: '0.9rem' }}>{value}</Typography>
                 </Box>
               )}
             >
               {['USD','EUR','GBP','INR'].map((code) => (
-                <MenuItem key={code} value={code}>
+                <MenuItem key={code} value={code} sx={{ py: 0.5 }}>
                   <Box sx={{ display: 'flex', alignItems: 'center' }}>
                     {getCurrencyIcon(code)}
-                    <Typography sx={{ ml: 1 }}>{code}</Typography>
+                    <Typography sx={{ ml: 1, fontSize: '0.9rem' }}>{code}</Typography>
                   </Box>
                 </MenuItem>
               ))}
@@ -74,8 +102,15 @@ const CurrencySelector = () => {
               variant="outlined"
               color="secondary"
               onClick={resetTable}
-              sx={{ textTransform: 'uppercase' }}
-              startIcon={<RestartAltIcon />}
+              size="small"
+              sx={{ 
+                textTransform: 'uppercase',
+                fontSize: '0.8rem',
+                py: 0.5,
+                px: 1.5,
+                height: 40
+              }}
+              startIcon={<RestartAltIcon sx={{ fontSize: '1rem' }} />}
             >
               Reset Table
             </Button>

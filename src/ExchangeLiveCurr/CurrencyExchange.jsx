@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { ArrowLeft, ArrowRight, Search, RefreshCw, ChevronUp, ChevronDown } from 'lucide-react';
+import { ArrowLeft, ArrowRight, Search, RefreshCw } from 'lucide-react';
 
 export default function ExchangeRatesTable() {
   const [rates, setRates] = useState({});
@@ -21,10 +21,11 @@ export default function ExchangeRatesTable() {
       maxWidth: "900px",
       margin: "0 auto",
       marginTop: "20px",
-      padding: "24px",
+      padding: "20px",
       boxShadow: "0 3px 10px rgba(0, 0, 0, 0.2)",
       borderRadius: "8px",
-      backgroundColor: "#ffffff"
+      backgroundColor: "#ffffff",
+      marginBottom:"10px"
     },
     header: {
       display: "flex",

@@ -31,32 +31,36 @@ const AmortizationTable = () => {
           width: '100%', 
           overflow: 'hidden', 
           mt: 2,
+          mb: 4, // Added margin bottom for space from page bottom
           bgcolor: theme.palette.background.paper,
           boxShadow: theme.shadows[3]
         }}
       >
         <Box sx={{ 
-          p: 2, 
+          p: 1, 
           borderBottom: 1, 
           borderColor: theme.palette.divider,
           display: 'flex',
           alignItems: 'center',
           gap: 1
         }}>
-          <TableChartIcon color="primary" />
-          <Typography variant="h6" sx={{ fontWeight: 'medium' }}>
+          <TableChartIcon color="primary" fontSize="small" />
+          <Typography variant="h6" sx={{ fontWeight: 'medium', fontSize: '1.1rem' }}>
             Amortization Schedule ({currency})
           </Typography>
         </Box>
         
-        <TableContainer sx={{ maxHeight: 440 }}>
-          <Table stickyHeader aria-label="amortization schedule table">
+        <TableContainer sx={{ maxHeight: 400 }}>
+          <Table stickyHeader aria-label="amortization schedule table" size="small">
             <TableHead>
               <TableRow>
                 <TableCell 
                   sx={{ 
                     bgcolor: theme.palette.mode === 'dark' ? theme.palette.grey[800] : theme.palette.grey[100],
-                    fontWeight: 'bold'
+                    fontWeight: 'bold',
+                    fontSize: '0.8rem', // Reduced header font size
+                    py: 1, // Reduced vertical padding
+                    px: 1.5 // Reduced horizontal padding
                   }}
                 >
                   Month
@@ -65,7 +69,10 @@ const AmortizationTable = () => {
                   align="right"
                   sx={{ 
                     bgcolor: theme.palette.mode === 'dark' ? theme.palette.grey[800] : theme.palette.grey[100],
-                    fontWeight: 'bold'
+                    fontWeight: 'bold',
+                    fontSize: '0.8rem',
+                    py: 1,
+                    px: 1.5
                   }}
                 >
                   Principal
@@ -74,7 +81,10 @@ const AmortizationTable = () => {
                   align="right"
                   sx={{ 
                     bgcolor: theme.palette.mode === 'dark' ? theme.palette.grey[800] : theme.palette.grey[100],
-                    fontWeight: 'bold'
+                    fontWeight: 'bold',
+                    fontSize: '0.8rem',
+                    py: 1,
+                    px: 1.5
                   }}
                 >
                   Interest
@@ -83,7 +93,10 @@ const AmortizationTable = () => {
                   align="right"
                   sx={{ 
                     bgcolor: theme.palette.mode === 'dark' ? theme.palette.grey[800] : theme.palette.grey[100],
-                    fontWeight: 'bold'
+                    fontWeight: 'bold',
+                    fontSize: '0.8rem',
+                    py: 1,
+                    px: 1.5
                   }}
                 >
                   Remaining Balance
@@ -103,12 +116,47 @@ const AmortizationTable = () => {
                     }
                   }}
                 >
-                  <TableCell component="th" scope="row">
+                  <TableCell 
+                    component="th" 
+                    scope="row"
+                    sx={{ 
+                      fontSize: '0.85rem', // Reduced cell font size
+                      py: 0.75, // Reduced vertical padding
+                      px: 1.5 // Reduced horizontal padding
+                    }}
+                  >
                     {row.month}
                   </TableCell>
-                  <TableCell align="right">{formatCurrency(row.principal)} {currency}</TableCell>
-                  <TableCell align="right">{formatCurrency(row.interest)} {currency}</TableCell>
-                  <TableCell align="right">{formatCurrency(row.balance)} {currency}</TableCell>
+                  <TableCell 
+                    align="right"
+                    sx={{ 
+                      fontSize: '0.85rem',
+                      py: 0.75,
+                      px: 1.5
+                    }}
+                  >
+                    {formatCurrency(row.principal)} {currency}
+                  </TableCell>
+                  <TableCell 
+                    align="right"
+                    sx={{ 
+                      fontSize: '0.85rem',
+                      py: 0.75,
+                      px: 1.5
+                    }}
+                  >
+                    {formatCurrency(row.interest)} {currency}
+                  </TableCell>
+                  <TableCell 
+                    align="right"
+                    sx={{ 
+                      fontSize: '0.85rem',
+                      py: 0.75,
+                      px: 1.5
+                    }}
+                  >
+                    {formatCurrency(row.balance)} {currency}
+                  </TableCell>
                 </TableRow>
               ))}
             </TableBody>
