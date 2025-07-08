@@ -136,9 +136,7 @@ const Header = () => {
           sx={{
             '& .MuiDrawer-paper': { 
               boxSizing: 'border-box', 
-              width: 240,
-              top: 64, // Position below the header
-              height: 'calc(100% - 64px)' // Adjust height to account for header
+              width: 240
             },
           }}
         >
