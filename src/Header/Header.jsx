@@ -39,8 +39,8 @@ const Header = () => {
   ];
 
   const drawer = (
-    <Box onClick={handleDrawerToggle} sx={{ textAlign: 'center' }}>
-      <Typography variant="h6" sx={{ my: 2 }}>
+    <Box onClick={handleDrawerToggle} sx={{ textAlign: 'left' }}>
+      <Typography variant="h6" sx={{ my: 2, px: 2 }}>
         Loan Calculator
       </Typography>
       <List>
@@ -49,7 +49,11 @@ const Header = () => {
             key={item.name} 
             component={Link} 
             to={item.path} 
-            sx={{ textAlign: 'center', color: 'inherit', textDecoration: 'none' }}
+            sx={{ 
+              color: 'inherit', 
+              textDecoration: 'none',
+              px: 2
+            }}
           >
             <ListItemText primary={item.name} />
           </ListItem>
@@ -60,8 +64,19 @@ const Header = () => {
 
   return (
     <>
-      <AppBar position="static">
-        <Toolbar>
+      <AppBar 
+        position="static" 
+        sx={{ 
+          boxShadow: 'none',
+          borderRadius: 0,
+          minHeight: 64,
+          '& .MuiToolbar-root': {
+            minHeight: 64,
+            height: 64
+          }
+        }}
+      >
+        <Toolbar sx={{ minHeight: 64, height: 64 }}>
           {isMobile && (
             <IconButton
               color="inherit"
@@ -121,7 +136,9 @@ const Header = () => {
           sx={{
             '& .MuiDrawer-paper': { 
               boxSizing: 'border-box', 
-              width: 240 
+              width: 240,
+              top: 64, // Position below the header
+              height: 'calc(100% - 64px)' // Adjust height to account for header
             },
           }}
         >
