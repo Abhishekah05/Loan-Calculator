@@ -31,20 +31,20 @@ const LoanCalculatorDashboard = () => {
 
   return (
     <Container maxWidth="sm" sx={{ py: 2 }}>
-      <Paper 
-        elevation={3} 
-        sx={{ 
+      <Paper
+        elevation={3}
+        sx={{
           p: 3,
           minHeight: 'auto',
           mx: 'auto',
           maxWidth: 500
         }}
       >
-        <Typography 
-          variant="h5" 
-          component="h1" 
-          gutterBottom 
-          sx={{ 
+        <Typography
+          variant="h5"
+          component="h1"
+          gutterBottom
+          sx={{
             fontWeight: 'bold',
             mb: 2
           }}
@@ -57,34 +57,53 @@ const LoanCalculatorDashboard = () => {
             <TextField
               fullWidth
               label="Loan Amount"
-              type="number"
+              type="text" // change from number to text to allow better formatting control
               value={loanAmount}
-              onChange={(e) => setLoanAmount(Number(e.target.value))}
-              InputProps={{ inputProps: { min: 0 } }}
+              onChange={(e) => {
+                const input = e.target.value.replace(/^0+(?!$)/, ''); // remove leading zeros
+                setLoanAmount(input === '' ? '' : Number(input));
+              }}
               size="small"
             />
+
           </Grid>
 
           <Grid item xs={12} sm={4}>
             <TextField
               fullWidth
               label="Interest Rate (%)"
-              type="number"
+              type="text"
               value={interestRate}
-              onChange={(e) => setInterestRate(Number(e.target.value))}
-              InputProps={{ inputProps: { min: 0, step: 0.1 } }}
+              onChange={(e) => {
+                let input = e.target.value;
+
+                // ✅ Allow only digits and at most one dot
+                if (!/^\d*\.?\d*$/.test(input)) return;
+
+                // ✅ Remove leading zeros unless followed by a dot (keep "0.5")
+                input = input.replace(/^0+(?!\.)/, '');
+
+                // ✅ If user types just ".", convert to "0."
+                if (input === '.') input = '0.';
+
+                setInterestRate(input); // 🚫 DO NOT convert to Number here
+              }}
               size="small"
             />
+
+
           </Grid>
 
           <Grid item xs={12} sm={4}>
             <TextField
               fullWidth
               label="Term (Years)"
-              type="number"
+              type="text"
               value={loanTerm}
-              onChange={(e) => setLoanTerm(Number(e.target.value))}
-              InputProps={{ inputProps: { min: 1 } }}
+              onChange={(e) => {
+                const input = e.target.value.replace(/^0+(?!$)/, '');
+                setLoanTerm(input === '' ? '' : Number(input));
+              }}
               size="small"
             />
           </Grid>
@@ -95,7 +114,7 @@ const LoanCalculatorDashboard = () => {
             variant="contained"
             startIcon={<CalculateIcon />}
             onClick={calculateLoan}
-            sx={{ 
+            sx={{
               bgcolor: theme.palette.primary.main,
               '&:hover': {
                 bgcolor: theme.palette.primary.dark,
@@ -106,17 +125,17 @@ const LoanCalculatorDashboard = () => {
           </Button>
         </Box>
 
-        <Paper 
-          sx={{ 
+        <Paper
+          sx={{
             p: 2,
             bgcolor: theme.palette.grey[100],
             minHeight: 'auto',
             height: 'auto'
           }}
         >
-          <Typography 
-            variant="h6" 
-            sx={{ 
+          <Typography
+            variant="h6"
+            sx={{
               color: theme.palette.primary.main,
               fontWeight: 'medium',
               fontSize: '1.1rem'

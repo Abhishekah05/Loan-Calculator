@@ -19,7 +19,7 @@ export const useLoanContext = () => {
 // Context Provider Component
 export const LoanProvider = ({ children }) => {
   const [loanAmount, setLoanAmount] = useState(100000);
-  const [interestRate, setInterestRate] = useState(8.5);
+  const [interestRate, setInterestRate] = useState('8.5');
   const [loanTerm, setLoanTerm] = useState(5);
   const [currency, setCurrency] = useState('USD');
   const [amortizationSchedule, setAmortizationSchedule] = useState([]);
@@ -28,31 +28,33 @@ export const LoanProvider = ({ children }) => {
 
   // Calculate loan function
   const calculateLoan = () => {
-    const monthlyRate = interestRate / 100 / 12;
+    const rate = parseFloat(interestRate || '0');
+    const monthlyRate = rate / 100 / 12;
+
     const totalPayments = loanTerm * 12;
-  
+
     if (loanAmount <= 0 || interestRate <= 0 || totalPayments <= 0) {
       setMonthlyPayment(0);
       setAmortizationSchedule([]);
       return;
     }
-  
+
     const calculatedMonthlyPayment =
       loanAmount *
       monthlyRate *
       Math.pow(1 + monthlyRate, totalPayments) /
       (Math.pow(1 + monthlyRate, totalPayments) - 1);
-  
+
     setMonthlyPayment(calculatedMonthlyPayment);
-  
+
     let balance = loanAmount;
     const schedule = [];
-  
+
     for (let month = 1; month <= totalPayments; month++) {
       const interest = balance * monthlyRate;
       const principal = calculatedMonthlyPayment - interest;
       balance -= principal;
-  
+
       schedule.push({
         month,
         payment: calculatedMonthlyPayment,
@@ -61,19 +63,19 @@ export const LoanProvider = ({ children }) => {
         balance: balance > 0 ? balance : 0
       });
     }
-  
+
     setAmortizationSchedule(schedule);
   };
-  
+
 
   const resetTable = () => {
     setLoanAmount(0);
-    setInterestRate(0);
+    setInterestRate('');
     setLoanTerm(0);
     setMonthlyPayment(0); // Reset EMI to 0
     setAmortizationSchedule([]);
   };
-  
+
 
   // Format currency helper
   const formatCurrency = (value) => {
