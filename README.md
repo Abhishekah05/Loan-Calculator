@@ -6,19 +6,21 @@ This is a modern, single-page web application built using **React JS** and **Mat
 - View a dynamic amortization schedule
 - Convert their EMI into other currencies using live exchange rates
 
----
+
 
 ## 🚀 Live Demo
 
 https://loan-calculator-five-gamma.vercel.app/
 
----
 
 ## 🛠️ Getting Started
 
-### 🔧 Installation
+### 🔧 Installation & Run
+
+Clone the repository and install the dependencies:
 
 ```bash
 git clone https://github.com/Abhishekah05/Loan-Calculator.git
 cd Loan-Calculator
 npm install
+npm start
